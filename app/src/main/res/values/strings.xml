@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">FNotes</string>
+    <string name="tasks">Tasks</string>
+    <string name="no_available_tasks_right_now_click_the_icon_to_add_a_task">No available tasks \nright now. \nClick the + icon to add a task.</string>
 </resources>
