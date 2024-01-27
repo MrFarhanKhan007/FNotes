@@ -1,9 +1,12 @@
 <resources>
     <string name="app_name">FNotes</string>
     <string name="no_available_notes_right_now_click_the_icon_to_add_a_task">No available notes. \nClick the + icon to add a note.</string>
-    <string name="add_a_note">Add anote.</string>
+    <string name="add_a_note">Add a note.</string>
     <string name="update">Update</string>
+    <string name="update_note">Update Note</string>
     <string name="delete">Delete</string>
     <string name="done">Done</string>
-    <string name="make_your_thoughts_tangible_with_a_note">Make your thoughts tangible with a note</string>
+    <string name="add_note_subline_text">Instant notes, endless ideas.</string>
+    <string name="update_note_subline_text">Give your notes a makeover.</string>
+
 </resources>

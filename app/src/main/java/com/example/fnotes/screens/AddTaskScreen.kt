@@ -28,6 +28,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -35,6 +36,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.example.fnotes.R
 import com.example.fnotes.ui.theme.backgroundColor
 import com.example.fnotes.ui.theme.contentColor
 import com.example.fnotes.ui.theme.textColor
@@ -84,9 +86,9 @@ fun AddTaskScreen(
             verticalArrangement = Arrangement.Center // Center content vertically
         ) {
 
-            AddTask()
+            Addnote()
 
-            Spacer(modifier.height(175.dp))
+            Spacer(modifier.height(150.dp))
 
             Add_Note_Field(value = value)
 
@@ -113,7 +115,7 @@ modifier
  */
 
 @Composable
-fun AddTask(modifier: Modifier = Modifier) {
+fun Addnote(modifier: Modifier = Modifier) {
     Box(
         modifier
             .fillMaxWidth()
@@ -130,8 +132,22 @@ fun AddTask(modifier: Modifier = Modifier) {
                         textColor
                     },
                     fontFamily = visby,
-                    fontSize = 60.sp
+                    fontSize = 55.sp
                 )
+            )
+
+            Text(
+                text = stringResource(id = R.string.add_note_subline_text),
+                style = TextStyle(
+                    textAlign = TextAlign.Start
+                ),
+                color = if (isSystemInDarkTheme()) {
+                    backgroundColor
+                } else {
+                    textColor
+                },
+                fontFamily = visby,
+                fontSize = 25.sp
             )
 
         }

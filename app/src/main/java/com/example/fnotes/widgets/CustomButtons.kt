@@ -83,7 +83,7 @@ fun DoneButton(modifier: Modifier = Modifier) {
             .fillMaxWidth()
             .padding(start = 20.dp, end = 20.dp)
             .clickable {
-                //TODO delete the values in the database
+                //TODO save the values in the database
             },
         shape = RoundedCornerShape(corner = CornerSize(3.dp)),
         colors = CardDefaults.cardColors(contentColor),
