@@ -1,4 +1,4 @@
-package com.example.fnotes.screens
+package com.example.fnotes.ui.screens
 
 import androidx.lifecycle.ViewModel
 

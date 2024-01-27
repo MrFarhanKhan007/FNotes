@@ -1,4 +1,4 @@
-package com.example.fnotes.screens
+package com.example.fnotes.ui.screens
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -41,12 +41,13 @@ import com.example.fnotes.ui.theme.backgroundColor
 import com.example.fnotes.ui.theme.contentColor
 import com.example.fnotes.ui.theme.textColor
 import com.example.fnotes.ui.theme.visby
-import com.example.fnotes.widgets.CustomTextField
-import com.example.fnotes.widgets.DoneButton
+import com.example.fnotes.ui.widgets.CustomTextField
+import com.example.fnotes.ui.widgets.DeleteButton
+import com.example.fnotes.ui.widgets.UpdateButton
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AddTaskScreen(
+fun UpdateNoteScreen(
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
@@ -86,11 +87,11 @@ fun AddTaskScreen(
             verticalArrangement = Arrangement.Center // Center content vertically
         ) {
 
-            Addnote()
+            UpdateNote()
 
             Spacer(modifier.height(150.dp))
 
-            Add_Note_Field(value = value)
+            Update_Note_Field(value = value)
 
             Column(
                 modifier = Modifier
@@ -98,7 +99,9 @@ fun AddTaskScreen(
                     .padding(bottom = 20.dp),
                 verticalArrangement = Arrangement.Bottom,
             ) {
-                DoneButton()
+                UpdateButton()
+                Spacer(modifier.height(20.dp))
+                DeleteButton()
             }
 
 
@@ -115,15 +118,15 @@ modifier
  */
 
 @Composable
-fun Addnote(modifier: Modifier = Modifier) {
+fun UpdateNote(modifier: Modifier = Modifier) {
     Box(
         modifier
             .fillMaxWidth()
-            .padding(start = 10.dp, end = 10.dp), contentAlignment = Alignment.TopStart
+            .padding(start = 10.dp), contentAlignment = Alignment.TopStart
     ) {
         Column {
             Text(
-                text = "Add a note",
+                text = stringResource(id = R.string.update_note),
                 style = TextStyle(
                     textAlign = TextAlign.Start,
                     color = if (isSystemInDarkTheme()) {
@@ -137,7 +140,7 @@ fun Addnote(modifier: Modifier = Modifier) {
             )
 
             Text(
-                text = stringResource(id = R.string.add_note_subline_text),
+                text = stringResource(id = R.string.update_note_subline_text),
                 style = TextStyle(
                     textAlign = TextAlign.Start
                 ),
@@ -155,7 +158,7 @@ fun Addnote(modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun Add_Note_Field(modifier: Modifier = Modifier, value: MutableState<String>) {
+fun Update_Note_Field(modifier: Modifier = Modifier, value: MutableState<String>) {
     Card(
         modifier
             .fillMaxWidth()
@@ -177,6 +180,6 @@ fun Add_Note_Field(modifier: Modifier = Modifier, value: MutableState<String>) {
 
 @Preview(showBackground = true)
 @Composable
-fun AddTaskScreenPreview() {
-    AddTaskScreen(navController = rememberNavController())
+fun UpdateNoteScreenPreview() {
+    UpdateNoteScreen(navController = rememberNavController())
 }

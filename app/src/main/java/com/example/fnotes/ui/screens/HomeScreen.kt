@@ -1,4 +1,4 @@
-package com.example.fnotes.screens
+package com.example.fnotes.ui.screens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -29,7 +29,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.fnotes.R
-import com.example.fnotes.navigation.TaskScreens
+import com.example.fnotes.navigation.NoteScreens
 import com.example.fnotes.ui.theme.backgroundColor
 import com.example.fnotes.ui.theme.textColor
 import com.example.fnotes.ui.theme.visby
@@ -81,7 +81,7 @@ fun MyApp(
             ) {
             FloatingActionButton(
                 onClick = {
-                    navController.navigate(route = TaskScreens.ADDTASK_SCREEN.name)
+                    navController.navigate(route = NoteScreens.ADDNOTE_SCREEN.name)
                 },
                 modifier
                     .padding(end = 20.dp, bottom = 20.dp)

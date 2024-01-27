@@ -1,4 +1,4 @@
-package com.example.fnotes.widgets
+package com.example.fnotes.ui.widgets
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box

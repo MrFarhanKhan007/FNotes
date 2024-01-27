@@ -1,16 +1,16 @@
 package com.example.fnotes.navigation
 
-enum class TaskScreens {
+enum class NoteScreens {
     HOME_SCREEN,
-    ADDTASK_SCREEN,
-    UPDATETASK_SCREEN;
+    ADDNOTE_SCREEN,
+    UPDATENOTE_SCREEN;
 
     companion object {
-        fun fromRoute(route: String?): TaskScreens =
+        fun fromRoute(route: String?): NoteScreens =
             when (route?.substringBefore("/")) {
                 HOME_SCREEN.name -> HOME_SCREEN
-                ADDTASK_SCREEN.name -> ADDTASK_SCREEN
-                UPDATETASK_SCREEN.name -> UPDATETASK_SCREEN
+                ADDNOTE_SCREEN.name -> ADDNOTE_SCREEN
+                UPDATENOTE_SCREEN.name -> UPDATENOTE_SCREEN
                 null -> HOME_SCREEN
                 else -> {
                     throw IllegalStateException("This $route is invalid!")
