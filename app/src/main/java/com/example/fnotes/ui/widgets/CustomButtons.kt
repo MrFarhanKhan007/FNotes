@@ -12,26 +12,33 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.example.fnotes.R
+import com.example.fnotes.data.Note
+import com.example.fnotes.navigation.NoteScreens
 import com.example.fnotes.ui.theme.contentColor
 import com.example.fnotes.ui.theme.textColor
 import com.example.fnotes.ui.theme.visby
 
 @Composable
-fun UpdateButton(modifier: Modifier = Modifier) {
+fun UpdateButton(
+    modifier: Modifier = Modifier,
+    onUpdate: (Note) -> Unit,
+) {
     Card(
         modifier
             .height(50.dp)
             .fillMaxWidth()
             .padding(start = 20.dp, end = 20.dp)
             .clickable {
-                //TODO delete the values in the database
+                onUpdate
             },
         shape = RoundedCornerShape(corner = CornerSize(3.dp)),
         colors = CardDefaults.cardColors(contentColor),
@@ -50,14 +57,17 @@ fun UpdateButton(modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun DeleteButton(modifier: Modifier = Modifier) {
+fun DeleteButton(
+    modifier: Modifier = Modifier,
+    onDelete: (Note) -> Unit
+) {
     Card(
         modifier
             .height(50.dp)
             .fillMaxWidth()
             .padding(start = 20.dp, end = 20.dp)
             .clickable {
-                //TODO delete the values in the database
+                onDelete
             },
         shape = RoundedCornerShape(corner = CornerSize(3.dp)),
         colors = CardDefaults.cardColors(contentColor),
@@ -76,14 +86,21 @@ fun DeleteButton(modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun DoneButton(modifier: Modifier = Modifier) {
+fun DoneButton(
+    modifier: Modifier = Modifier,
+    onDone: (Note) -> Unit,
+    descriptionValue: MutableState<String>,
+    navController: NavHostController
+) {
     Card(
         modifier
             .height(50.dp)
             .fillMaxWidth()
             .padding(start = 20.dp, end = 20.dp)
             .clickable {
-                //TODO save the values in the database
+                val note = Note(noteDescription = descriptionValue.value)
+                onDone.invoke(note)
+                navController.navigate(route = NoteScreens.HOME_SCREEN.name)
             },
         shape = RoundedCornerShape(corner = CornerSize(3.dp)),
         colors = CardDefaults.cardColors(contentColor),

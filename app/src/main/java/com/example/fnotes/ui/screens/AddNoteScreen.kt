@@ -34,9 +34,11 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.fnotes.R
+import com.example.fnotes.data.Note
 import com.example.fnotes.ui.theme.backgroundColor
 import com.example.fnotes.ui.theme.contentColor
 import com.example.fnotes.ui.theme.textColor
@@ -50,8 +52,20 @@ fun AddNoteScreen(
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
-    val value = remember {
+    val descriptionValue = remember {
         mutableStateOf("")
+    }
+
+    val addNoteViewModel = hiltViewModel<AddNoteViewModel>()
+    val dynamicColor = if (isSystemInDarkTheme()) {
+        textColor
+    } else {
+        backgroundColor
+    }
+    val dynamicColor2 = if (isSystemInDarkTheme()) {
+        backgroundColor
+    } else {
+        textColor
     }
 
     Scaffold(
@@ -68,13 +82,13 @@ fun AddNoteScreen(
                         modifier.clickable {
                             navController.popBackStack()
                         },
-                        tint = textColor
+                        tint = dynamicColor2
                     )
                 },
-                colors = TopAppBarDefaults.topAppBarColors(backgroundColor)
+                colors = TopAppBarDefaults.topAppBarColors(dynamicColor)
             )
         },
-        containerColor = backgroundColor
+        containerColor = dynamicColor
     )
     { paddingValues ->
 
@@ -86,11 +100,11 @@ fun AddNoteScreen(
             verticalArrangement = Arrangement.Center // Center content vertically
         ) {
 
-            Addnote()
+            AddNote()
 
             Spacer(modifier.height(150.dp))
 
-            Add_Note_Field(value = value)
+            Add_Note_Field(value = descriptionValue)
 
             Column(
                 modifier = Modifier
@@ -98,24 +112,24 @@ fun AddNoteScreen(
                     .padding(bottom = 20.dp),
                 verticalArrangement = Arrangement.Bottom,
             ) {
-                DoneButton()
+                DoneButton(
+                    onDone = {
+                        val note = Note(noteDescription = descriptionValue.value)
+                        addNoteViewModel.addNote(note)
+                    },
+                    descriptionValue = descriptionValue,
+                    navController = navController
+                )
             }
-
-
         }
 
     }
+
 }
 
-/*
-modifier
-                    .fillMaxSize()
-                    .padding(bottom = 20.dp),
-                verticalArrangement = Arrangement.Bottom,
- */
 
 @Composable
-fun Addnote(modifier: Modifier = Modifier) {
+fun AddNote(modifier: Modifier = Modifier) {
     Box(
         modifier
             .fillMaxWidth()

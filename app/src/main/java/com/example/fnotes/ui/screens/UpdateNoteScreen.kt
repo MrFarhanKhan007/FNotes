@@ -34,9 +34,11 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.fnotes.R
+import com.example.fnotes.data.Note
 import com.example.fnotes.ui.theme.backgroundColor
 import com.example.fnotes.ui.theme.contentColor
 import com.example.fnotes.ui.theme.textColor
@@ -51,9 +53,23 @@ fun UpdateNoteScreen(
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
-    val value = remember {
+    val updateDescriptionValue = remember {
         mutableStateOf("")
     }
+
+    val dynamicColor = if (isSystemInDarkTheme()) {
+        textColor
+    } else {
+        backgroundColor
+    }
+
+    val dynamicColor2 = if (isSystemInDarkTheme()) {
+        backgroundColor
+    } else {
+        textColor
+    }
+
+    val updateNoteScreenViewModel = hiltViewModel<UpdateNoteScreenViewModel>()
 
     Scaffold(
         modifier.fillMaxSize(),
@@ -69,13 +85,13 @@ fun UpdateNoteScreen(
                         modifier.clickable {
                             navController.popBackStack()
                         },
-                        tint = textColor
+                        tint = dynamicColor2
                     )
                 },
-                colors = TopAppBarDefaults.topAppBarColors(backgroundColor)
+                colors = TopAppBarDefaults.topAppBarColors(dynamicColor)
             )
         },
-        containerColor = backgroundColor
+        containerColor = dynamicColor
     )
     { paddingValues ->
 
@@ -91,7 +107,7 @@ fun UpdateNoteScreen(
 
             Spacer(modifier.height(150.dp))
 
-            Update_Note_Field(value = value)
+            Update_Note_Field(value = updateDescriptionValue)
 
             Column(
                 modifier = Modifier
@@ -99,9 +115,17 @@ fun UpdateNoteScreen(
                     .padding(bottom = 20.dp),
                 verticalArrangement = Arrangement.Bottom,
             ) {
-                UpdateButton()
+                UpdateButton(
+                    onUpdate = {
+                        val note = Note(noteDescription = updateDescriptionValue.value)
+                        updateNoteScreenViewModel.updateNote(note)
+                    },
+
+                    )
                 Spacer(modifier.height(20.dp))
-                DeleteButton()
+                DeleteButton(onDelete = {
+                    updateNoteScreenViewModel.deleteNote(it)
+                })
             }
 
 

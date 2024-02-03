@@ -17,6 +17,7 @@ import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.fnotes.ui.theme.textColor
 import com.example.fnotes.ui.theme.visby
 
 @OptIn(ExperimentalComposeUiApi::class)
@@ -37,7 +38,8 @@ fun CustomTextField(
             .height(75.dp),
         textStyle = TextStyle(
             fontSize = 20.sp,
-            fontFamily = visby
+            fontFamily = visby,
+            color = textColor
         ),
         enabled = true,
         keyboardOptions = KeyboardOptions(
