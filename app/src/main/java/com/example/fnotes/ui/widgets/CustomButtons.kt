@@ -1,5 +1,7 @@
 package com.example.fnotes.ui.widgets
 
+import android.content.Context
+import android.widget.Toast
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -30,7 +32,9 @@ import com.example.fnotes.ui.theme.visby
 @Composable
 fun UpdateButton(
     modifier: Modifier = Modifier,
-    onUpdate: (Note) -> Unit,
+    onUpdate: () -> Unit,
+    navController: NavHostController,
+    context: Context
 ) {
     Card(
         modifier
@@ -38,7 +42,11 @@ fun UpdateButton(
             .fillMaxWidth()
             .padding(start = 20.dp, end = 20.dp)
             .clickable {
-                onUpdate
+                onUpdate.invoke() //NOT WORKING RIGHT
+                navController.navigate(route = NoteScreens.HOME_SCREEN.name)
+                Toast
+                    .makeText(context, "Note Updated!", Toast.LENGTH_SHORT)
+                    .show()
             },
         shape = RoundedCornerShape(corner = CornerSize(3.dp)),
         colors = CardDefaults.cardColors(contentColor),
@@ -59,7 +67,9 @@ fun UpdateButton(
 @Composable
 fun DeleteButton(
     modifier: Modifier = Modifier,
-    onDelete: (Note) -> Unit
+    onDelete: () -> Unit,
+    navController: NavHostController,
+    context: Context
 ) {
     Card(
         modifier
@@ -67,7 +77,11 @@ fun DeleteButton(
             .fillMaxWidth()
             .padding(start = 20.dp, end = 20.dp)
             .clickable {
-                onDelete
+                onDelete.invoke()
+                navController.navigate(route = NoteScreens.HOME_SCREEN.name)
+                Toast
+                    .makeText(context, "Note Deleted", Toast.LENGTH_SHORT)
+                    .show()
             },
         shape = RoundedCornerShape(corner = CornerSize(3.dp)),
         colors = CardDefaults.cardColors(contentColor),
@@ -90,7 +104,8 @@ fun DoneButton(
     modifier: Modifier = Modifier,
     onDone: (Note) -> Unit,
     descriptionValue: MutableState<String>,
-    navController: NavHostController
+    navController: NavHostController,
+    context: Context
 ) {
     Card(
         modifier
@@ -101,6 +116,9 @@ fun DoneButton(
                 val note = Note(noteDescription = descriptionValue.value)
                 onDone.invoke(note)
                 navController.navigate(route = NoteScreens.HOME_SCREEN.name)
+                Toast
+                    .makeText(context, "Note Added!", Toast.LENGTH_SHORT)
+                    .show()
             },
         shape = RoundedCornerShape(corner = CornerSize(3.dp)),
         colors = CardDefaults.cardColors(contentColor),

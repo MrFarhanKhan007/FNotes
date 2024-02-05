@@ -23,22 +23,26 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
 import com.example.fnotes.R
 import com.example.fnotes.data.Note
+import com.example.fnotes.ui.misc.Objects.NotePlaceHolder
 import com.example.fnotes.ui.theme.backgroundColor
 import com.example.fnotes.ui.theme.contentColor
 import com.example.fnotes.ui.theme.textColor
@@ -46,16 +50,37 @@ import com.example.fnotes.ui.theme.visby
 import com.example.fnotes.ui.widgets.CustomTextField
 import com.example.fnotes.ui.widgets.DeleteButton
 import com.example.fnotes.ui.widgets.UpdateButton
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun UpdateNoteScreen(
     navController: NavHostController,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    noteId: Int
 ) {
-    val updateDescriptionValue = remember {
-        mutableStateOf("")
+    val scope = rememberCoroutineScope()
+
+    val updateNoteScreenViewModel = hiltViewModel<UpdateNoteScreenViewModel>()
+
+
+    var note by remember {
+        mutableStateOf(NotePlaceHolder)
     }
+
+    val currentNote = remember {
+        mutableStateOf(note.noteDescription)
+    }
+
+    LaunchedEffect(true) {
+        scope.launch(Dispatchers.IO) {
+            note = updateNoteScreenViewModel.getNoteById(noteId)
+
+        }
+
+    }
+
 
     val dynamicColor = if (isSystemInDarkTheme()) {
         textColor
@@ -69,7 +94,6 @@ fun UpdateNoteScreen(
         textColor
     }
 
-    val updateNoteScreenViewModel = hiltViewModel<UpdateNoteScreenViewModel>()
 
     Scaffold(
         modifier.fillMaxSize(),
@@ -107,7 +131,7 @@ fun UpdateNoteScreen(
 
             Spacer(modifier.height(150.dp))
 
-            Update_Note_Field(value = updateDescriptionValue)
+            Update_Note_Field(value = currentNote)
 
             Column(
                 modifier = Modifier
@@ -116,16 +140,31 @@ fun UpdateNoteScreen(
                 verticalArrangement = Arrangement.Bottom,
             ) {
                 UpdateButton(
+                    navController = navController,
                     onUpdate = {
-                        val note = Note(noteDescription = updateDescriptionValue.value)
-                        updateNoteScreenViewModel.updateNote(note)
+                        updateNoteScreenViewModel.updateNote(
+                            Note(
+                                id = note.id,
+                                noteDescription = note.noteDescription
+                            )
+                        )
                     },
+                    context = LocalContext.current
 
-                    )
+                )
                 Spacer(modifier.height(20.dp))
-                DeleteButton(onDelete = {
-                    updateNoteScreenViewModel.deleteNote(it)
-                })
+                DeleteButton(
+                    navController = navController,
+                    onDelete = {
+                        updateNoteScreenViewModel.deleteNote(
+                            Note(
+                                id = note.id,
+                                noteDescription = note.noteDescription
+                            )
+                        )
+                    },
+                    context = LocalContext.current
+                )
             }
 
 
@@ -202,8 +241,8 @@ fun Update_Note_Field(modifier: Modifier = Modifier, value: MutableState<String>
 //    Add_Note_Field()
 //}
 
-@Preview(showBackground = true)
-@Composable
-fun UpdateNoteScreenPreview() {
-    UpdateNoteScreen(navController = rememberNavController())
-}
+//@Preview(showBackground = true)
+//@Composable
+//fun UpdateNoteScreenPreview() {
+//    UpdateNoteScreen(navController = rememberNavController())
+//}

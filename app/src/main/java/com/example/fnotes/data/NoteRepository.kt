@@ -14,7 +14,7 @@ class NoteRepository @Inject constructor(private val noteDao: NoteDao) {
 
     suspend fun updateNote(note: Note) = noteDao.updateNote(note = note)
 
-    suspend fun getNoteById(id: String): Note = noteDao.getNoteById(id = id)
+    suspend fun getNoteById(id: Int): Note = noteDao.getNoteById(id = id)
 
     fun getAllNotes(): Flow<List<Note>> =
         noteDao.getAllNotes().flowOn(context = Dispatchers.IO).conflate()

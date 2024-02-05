@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.BasicTextField
-import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
@@ -26,7 +25,7 @@ fun CustomTextField(
     modifier: Modifier = Modifier,
     value: MutableState<String>
 ) {
-    val localKeyboardController = LocalSoftwareKeyboardController.current
+    LocalSoftwareKeyboardController.current
     BasicTextField(
         value = value.value,
         onValueChange = {
@@ -46,13 +45,7 @@ fun CustomTextField(
             capitalization = KeyboardCapitalization.None,
             autoCorrect = false,
             keyboardType = KeyboardType.Text,
-            imeAction = ImeAction.Done
-        ),
-        keyboardActions = KeyboardActions(
-            //just close the keyboard
-            onDone = {
-                localKeyboardController?.hide()
-            }
+            imeAction = ImeAction.Default
         ),
         singleLine = false,
         minLines = 1,

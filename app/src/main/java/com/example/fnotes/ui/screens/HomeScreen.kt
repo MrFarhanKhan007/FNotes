@@ -139,7 +139,7 @@ fun MyApp(
                         .padding(end = 20.dp, bottom = 20.dp)
                         .size(60.dp),
                     elevation = FloatingActionButtonDefaults.elevation(10.dp),
-                    containerColor = contentColor,
+                    containerColor = Color(0xFFF4E680),
                     shape = CircleShape,
                     content = {
                         Icon(
@@ -155,76 +155,6 @@ fun MyApp(
 }
 
 
-//@Composable
-//fun MyApp(
-//    navController: NavHostController,
-//    modifier: Modifier = Modifier
-//) {
-//
-//    val homeScreenViewModel = hiltViewModel<HomeScreenViewModel>()
-//    val noteListState by homeScreenViewModel.noteList.collectAsState()
-//
-//    Column(
-//        modifier
-//            .zIndex(0f)
-//            .fillMaxSize()
-//            .background(backgroundColor),
-//        horizontalAlignment = Alignment.CenterHorizontally,
-//    ) {
-//
-//        Spacer(modifier.height(50.dp))
-//
-//        Text(
-//            text = stringResource(R.string.app_name),
-//            modifier
-//                .align(Alignment.Start)
-//                .padding(start = 10.dp),
-//            style = TextStyle(
-//                textAlign = TextAlign.Justify,
-//                color = if (isSystemInDarkTheme()) {
-//                    backgroundColor
-//                } else {
-//                    textColor
-//                },
-//                fontFamily = visby,
-//                fontSize = 80.sp
-//            )
-//        )
-//
-//        if (noteListState.isEmpty()) {
-//            Spacer(modifier.height(200.dp))
-//
-//            NoAvailableTaskText()
-//        } else {
-//            Spacer(modifier.height(50.dp))
-//            LazyColumn(modifier.zIndex(-1f)) {
-//                items(noteListState) { note ->
-//                    // Render each note in a list item
-//                    NoteListItem(note = note, navController = navController)
-////                Add_Note_Plus_Icon(modifier, navController)
-//                }
-//
-//            }
-//
-//
-//        }
-//
-//        Spacer(modifier.height(200.dp))
-//
-//        FloatingActionButton(
-//            onClick = {
-//                navController.navigate(route = NoteScreens.ADDNOTE_SCREEN.name)
-//            },
-//            modifier
-//                .align(Alignment.End)
-//                .padding(end = 20.dp, bottom = 20.dp)
-//                .size(60.dp),
-//            containerColor = Color.Green,
-//            shape = CircleShape,
-//            content = { Icon(imageVector = Icons.Default.Add, contentDescription = null) }
-//        )
-//    }
-//}
 
 @Composable
 fun NoteListItem(note: Note, modifier: Modifier = Modifier, navController: NavHostController) {
@@ -304,9 +234,3 @@ fun Add_Note_Plus_Icon_Preview() {
         content = { Icon(imageVector = Icons.Default.Add, contentDescription = null) }
     )
 }
-
-//@Preview(showBackground = true)
-//@Composable
-//fun HomeScreenPreview() {
-//    HomeScreen(navController = rememberNavController())
-//}

@@ -2,9 +2,11 @@ package com.example.fnotes.navigation
 
 import android.util.Log
 import androidx.compose.runtime.Composable
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.example.fnotes.data.NoteDao
 import com.example.fnotes.data.NoteRepository
 import com.example.fnotes.ui.screens.AddNoteScreen
@@ -30,20 +32,23 @@ fun TasksNavigationComponent(noteDao: NoteDao) {
             AddNoteScreen(navController = navController)
         }
 
-        composable(route = NoteScreens.UPDATENOTE_SCREEN.name + "/id={noteID}") { backStackEntry ->
-            val noteID = backStackEntry.arguments?.getString("noteID")
+        composable(
+            route = NoteScreens.UPDATENOTE_SCREEN.name + "/id={noteID}",
+            arguments = listOf(navArgument(name = "noteID") {
+                NavType.IntType
+                defaultValue = -1
+            })
+        )
+        { backStackEntry ->
+            val note_ID = backStackEntry.arguments?.getInt("noteID")
 
-            if (noteID == null) {
-                Log.d("TAG", "TasksNavigationComponent: noteID is null")
+            if (note_ID == null) {
+                Log.d("TAG", "TasksNavigationComponent: $note_ID is null")
                 navController.navigate(route = NoteScreens.HOME_SCREEN.name)
                 return@composable
             }
 
-
-            //TODO: UpdateNoteScreen(navController = navController, noteID = noteID)
-
-
-            UpdateNoteScreen(navController = navController)
+            UpdateNoteScreen(navController = navController, noteId = note_ID)
         }
     }
 
