@@ -1,6 +1,6 @@
-# FNotes App 📝
+# FNotes 📝
 
-Welcome to the FNotes App! This app is built in Jetpack Compose with MVVM architecture and utilizes Room Database for storage and CRUD operations. Dagger-Hilt is used for dependency injection, providing a seamless development experience.
+Welcome to the FNotes! This app is built in Jetpack Compose with MVVM architecture and utilizes Room Database for storage and CRUD operations. Dagger-Hilt is used for dependency injection, providing a seamless development experience.
 
 ## Screenshots 📸
 <img src="https://shorturl.at/JMV05" alt="Screenshot" width="800">
