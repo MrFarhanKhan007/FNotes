@@ -22,7 +22,7 @@ Welcome to the FNotes App! This app is built in Jetpack Compose with MVVM archit
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/your-username/FNotes.git
+   https://github.com/MrFarhanKhan007/FNotes.git
    ```
 
 2. **Open the project in Android Studio.**
