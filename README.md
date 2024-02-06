@@ -2,6 +2,9 @@
 
 Welcome to the FNotes App! This app is built in Jetpack Compose with MVVM architecture and utilizes Room Database for storage and CRUD operations. Dagger-Hilt is used for dependency injection, providing a seamless development experience.
 
+## Screenshots 📸
+<img src="https://shorturl.at/JMV05" alt="Screenshot" width="800">
+
 ## Features 🌟
 
 - Easy-to-use interface
@@ -43,3 +46,6 @@ This project is licensed under the [MIT License](LICENSE).
 A big shoutout to the Android development community for providing valuable resources and guidance throughout the development process.
 
 Happy note-taking! 📝✨
+
+## Sample Video 📹
+https://github.com/MrFarhanKhan007/FNotes/assets/96666465/e38037f7-7f68-41bb-85b6-fb537843ca96
