@@ -12,9 +12,7 @@ import javax.inject.Inject
 class AddNoteViewModel
 @Inject constructor(private val repository: NoteRepository) : ViewModel() {
 
-    fun addNote(note: Note) = viewModelScope.launch {
-        repository.insertNote(note)
+    fun upsertNote(note: Note) = viewModelScope.launch {
+        repository.upsertNote(note)
     }
-
-
 }

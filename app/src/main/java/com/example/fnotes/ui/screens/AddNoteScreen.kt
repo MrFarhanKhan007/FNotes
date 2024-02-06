@@ -53,11 +53,13 @@ fun AddNoteScreen(
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
+
     val descriptionValue = remember {
         mutableStateOf("")
     }
 
     val addNoteViewModel = hiltViewModel<AddNoteViewModel>()
+
     val dynamicColor = if (isSystemInDarkTheme()) {
         textColor
     } else {
@@ -116,7 +118,7 @@ fun AddNoteScreen(
                 DoneButton(
                     onDone = {
                         val note = Note(noteDescription = descriptionValue.value)
-                        addNoteViewModel.addNote(note)
+                        addNoteViewModel.upsertNote(note)
                     },
                     descriptionValue = descriptionValue,
                     navController = navController,

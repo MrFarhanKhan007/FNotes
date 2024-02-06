@@ -155,7 +155,6 @@ fun MyApp(
 }
 
 
-
 @Composable
 fun NoteListItem(note: Note, modifier: Modifier = Modifier, navController: NavHostController) {
 

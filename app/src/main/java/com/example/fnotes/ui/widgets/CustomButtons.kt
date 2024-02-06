@@ -80,7 +80,7 @@ fun DeleteButton(
                 onDelete.invoke()
                 navController.navigate(route = NoteScreens.HOME_SCREEN.name)
                 Toast
-                    .makeText(context, "Note Deleted", Toast.LENGTH_SHORT)
+                    .makeText(context, "Note Deleted!", Toast.LENGTH_SHORT)
                     .show()
             },
         shape = RoundedCornerShape(corner = CornerSize(3.dp)),

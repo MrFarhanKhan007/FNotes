@@ -8,13 +8,11 @@ import javax.inject.Inject
 
 class NoteRepository @Inject constructor(private val noteDao: NoteDao) {
 
-    suspend fun insertNote(note: Note) = noteDao.insertNote(note = note)
-
     suspend fun deleteNote(note: Note) = noteDao.deleteNote(note = note)
 
-    suspend fun updateNote(note: Note) = noteDao.updateNote(note = note)
-
     suspend fun getNoteById(id: Int): Note = noteDao.getNoteById(id = id)
+
+    suspend fun upsertNote(note: Note) = noteDao.upsertNote(note = note)
 
     fun getAllNotes(): Flow<List<Note>> =
         noteDao.getAllNotes().flowOn(context = Dispatchers.IO).conflate()

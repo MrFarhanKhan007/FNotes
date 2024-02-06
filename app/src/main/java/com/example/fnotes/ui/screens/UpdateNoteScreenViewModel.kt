@@ -15,12 +15,12 @@ class UpdateNoteScreenViewModel
         repository.deleteNote(note)
     }
 
-    fun updateNote(note: Note) =
-        viewModelScope.launch {
-            repository.updateNote(note)
-        }
-
     suspend fun getNoteById(id: Int): Note {
         return repository.getNoteById(id)
     }
+
+    fun upsertNote(note: Note) =
+        viewModelScope.launch {
+            repository.upsertNote(note)
+        }
 }

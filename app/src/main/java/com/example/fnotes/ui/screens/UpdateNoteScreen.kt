@@ -1,5 +1,6 @@
 package com.example.fnotes.ui.screens
 
+import android.util.Log
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
@@ -64,22 +65,22 @@ fun UpdateNoteScreen(
 
     val updateNoteScreenViewModel = hiltViewModel<UpdateNoteScreenViewModel>()
 
-
     var note by remember {
         mutableStateOf(NotePlaceHolder)
     }
 
     val currentNote = remember {
-        mutableStateOf(note.noteDescription)
+        mutableStateOf("")
     }
 
     LaunchedEffect(true) {
         scope.launch(Dispatchers.IO) {
             note = updateNoteScreenViewModel.getNoteById(noteId)
-
+            currentNote.value = note.noteDescription
         }
-
     }
+
+    Log.d("DEFAULT NOTE", note.noteDescription + note.id)
 
 
     val dynamicColor = if (isSystemInDarkTheme()) {
@@ -139,13 +140,15 @@ fun UpdateNoteScreen(
                     .padding(bottom = 20.dp),
                 verticalArrangement = Arrangement.Bottom,
             ) {
+
                 UpdateButton(
                     navController = navController,
                     onUpdate = {
-                        updateNoteScreenViewModel.updateNote(
+                        Log.d("VERIFY", note.noteDescription + note.id)
+                        updateNoteScreenViewModel.upsertNote(
                             Note(
                                 id = note.id,
-                                noteDescription = note.noteDescription
+                                noteDescription = currentNote.value
                             )
                         )
                     },
