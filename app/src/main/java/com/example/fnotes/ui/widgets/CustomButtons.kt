@@ -14,7 +14,6 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -23,7 +22,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.fnotes.R
-import com.example.fnotes.data.Note
 import com.example.fnotes.navigation.NoteScreens
 import com.example.fnotes.ui.theme.contentColor
 import com.example.fnotes.ui.theme.textColor
@@ -102,8 +100,7 @@ fun DeleteButton(
 @Composable
 fun DoneButton(
     modifier: Modifier = Modifier,
-    onDone: (Note) -> Unit,
-    descriptionValue: MutableState<String>,
+    onDone: () -> Unit,
     navController: NavHostController,
     context: Context
 ) {
@@ -113,8 +110,7 @@ fun DoneButton(
             .fillMaxWidth()
             .padding(start = 20.dp, end = 20.dp)
             .clickable {
-                val note = Note(noteDescription = descriptionValue.value)
-                onDone.invoke(note)
+                onDone.invoke()
                 navController.navigate(route = NoteScreens.HOME_SCREEN.name)
                 Toast
                     .makeText(context, "Note Added!", Toast.LENGTH_SHORT)

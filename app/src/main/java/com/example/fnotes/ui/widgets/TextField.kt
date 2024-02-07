@@ -7,9 +7,7 @@ import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
@@ -19,13 +17,11 @@ import androidx.compose.ui.unit.sp
 import com.example.fnotes.ui.theme.textColor
 import com.example.fnotes.ui.theme.visby
 
-@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun CustomTextField(
     modifier: Modifier = Modifier,
     value: MutableState<String>
 ) {
-    LocalSoftwareKeyboardController.current
     BasicTextField(
         value = value.value,
         onValueChange = {

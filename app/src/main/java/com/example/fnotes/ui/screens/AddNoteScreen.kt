@@ -117,10 +117,10 @@ fun AddNoteScreen(
             ) {
                 DoneButton(
                     onDone = {
-                        val note = Note(noteDescription = descriptionValue.value)
-                        addNoteViewModel.upsertNote(note)
+                        addNoteViewModel.upsertNote(
+                            Note(noteDescription = descriptionValue.value)
+                        )
                     },
-                    descriptionValue = descriptionValue,
                     navController = navController,
                     context = LocalContext.current
                 )
