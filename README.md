@@ -48,4 +48,5 @@ A big shoutout to the Android development community for providing valuable resou
 Happy note-taking! 📝✨
 
 ## Sample Video 📹
-https://github.com/MrFarhanKhan007/FNotes/assets/96666465/e38037f7-7f68-41bb-85b6-fb537843ca96
+https://github.com/user-attachments/assets/8015d73f-75a2-4972-9c4c-8c4aa3ea144b
+
