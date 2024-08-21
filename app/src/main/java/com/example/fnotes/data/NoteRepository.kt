@@ -14,7 +14,7 @@ class NoteRepository @Inject constructor(private val noteDao: NoteDao) {
 
     suspend fun upsertNote(note: Note) = noteDao.upsertNote(note = note)
 
-    fun getAllNotes(): Flow<List<Note>> =
-        noteDao.getAllNotes().flowOn(context = Dispatchers.IO).conflate()
+    fun getAllNotesDESC(): Flow<List<Note>> =
+        noteDao.getAllNotesDESC().flowOn(context = Dispatchers.IO).conflate()
 
 }

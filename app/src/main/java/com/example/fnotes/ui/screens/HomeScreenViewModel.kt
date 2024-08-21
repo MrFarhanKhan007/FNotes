@@ -22,7 +22,7 @@ class HomeScreenViewModel
 
     init {
         viewModelScope.launch(context = Dispatchers.IO) {
-            repository.getAllNotes().distinctUntilChanged().collect { listOfNotes ->
+            repository.getAllNotesDESC().distinctUntilChanged().collect { listOfNotes ->
                 if (listOfNotes.isEmpty()) {
                     Log.d("EMPTY LIST", "THE LIST IS CURRENTLY EMPTY")
                 } else {
